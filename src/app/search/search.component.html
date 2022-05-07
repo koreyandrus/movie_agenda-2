@@ -1,1 +1,44 @@
-<p>search works!</p>
+<!-- <div class="container">
+  <div class="col-lg-12 col-md-6">
+      <div class="pt-3 pb-4">
+        <div class="input-group">
+          <input type="text" id="" name="" class="form-control" value="Admin Dashboard">
+          <div class="input-group-append">
+              <button type="button" class="btn btn-custom" style="background-color: #d84727; color: #FFF;">Search</button>
+          </div>
+        </div>
+      </div>
+  </div>
+</div> -->
+
+<!-- <div class="container" style="height: 100vh;">
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2 mt-5">
+      <div class="input-group">
+        <select class="custom-select" id="inputGroupSelect01" style="background-color: #FFF;">
+          <option selected>Choose...</option>
+          <option value="1">Movie</option>
+          <option value="2">TV Show</option>
+          <option value="3">Actor</option>
+        </select>
+        <input type="text" class="form-control" name="x" placeholder="Search term...">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button" style="background-color: #d84727;color: #fff">Search</button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<form class="container mt-3" #f="ngForm" (ngSubmit)="onSubmit(f)">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <select name="searchType" class="form-control" id="inputGroupSelect01" style="background-color: #FFF;" ngModel>
+        <option *ngFor="let type of types">{{ type }}</option>
+      </select>
+    </div>
+    <input type="text" class="form-control" name="searchTerm" placeholder="Search term" ngModel>
+    <button class="btn btn-outline-secondary" type="submit" style="background-color: #d84727;color: #fff">Search</button>
+  </div>
+</form>
+
