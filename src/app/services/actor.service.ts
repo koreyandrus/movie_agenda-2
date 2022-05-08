@@ -1,29 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
-import { Movie } from '../models/movie.model';
 import { Constants } from '../shared/Constants';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MoviesService {
+export class ActorService {
   apiKey: string;
   baseUrl: string;
   region: string;
   language: string;
 
   constructor(private http: HttpClient) {
-    this.baseUrl = Constants.BASE_URL;
     this.apiKey = Constants.API_KEY;
+    this.baseUrl = Constants.BASE_URL;
     this.region = Constants.REGION;
     this.language = Constants.LANGUAGE;
   }
 
-  searchMovies(searchTerm: string): Observable<Movie[]> {
-    return this.http.get<Movie[]>(
-      `${this.baseUrl}search/movie?api_key=${this.apiKey}&query=${searchTerm}`
+  searchActor(searchTerm: string): Observable<any> {
+    return this.http.get(
+      `${this.baseUrl}search/person?api_key=${this.apiKey}&query=${searchTerm}`
     );
   }
 }

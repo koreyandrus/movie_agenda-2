@@ -1,0 +1,13 @@
+
+<div>
+    <div class="listing-item-style">
+        <img *ngIf="movie?.poster_path" src="https://image.tmdb.org/t/p/w370_and_h556_bestv2/{{movie?.poster_path}}"
+            [alt]="movie.title ? movie.title : movie.name">
+        <img *ngIf="!movie?.poster_path" src="assets/images/default-movie.png"
+            [alt]="movie.title ? movie.title : movie.name">
+        <h6>{{ movie?.title }}</h6>
+        <p class="rate"><i class="material-icons">star</i><span>{{movie?.vote_average}}</span> /10</p>
+        <p class="year"><span>{{movie?.release_date | date: 'yyyy'}}</span>
+        </p>
+    </div>
+</div>
