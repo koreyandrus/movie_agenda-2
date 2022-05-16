@@ -3,13 +3,7 @@
   </div><!--movie-header-->
   <div class="movie-content">
     <div class="movie-content-header">
-
-
-      <h4 class="movie-title">{{ movie.title }}</h4>
-
-      <div class="add-movie">
-        <button class="add-button">Add</button>
-      </div>
+      <p class="movie-title">{{ movie.title }}</p>
     </div>
     <div class="movie-info">
       <div class="info-section">
@@ -24,7 +18,10 @@
       <div class="info-section">
         <label>Rating</label>
         <span>{{ movie.vote_average }}</span>
-      </div><!--seat-->
+      </div>
+      <div class="add-movie">
+        <button class="add-button">Add</button>
+      </div>
     </div>
   </div><!--movie-content-->
 </div><!--movie-card-->

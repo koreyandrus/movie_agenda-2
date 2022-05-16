@@ -31,6 +31,9 @@
 }
 
 .movie-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 315px;
   height: 150px;
 
@@ -63,8 +66,8 @@
   display: inline-block;
   font-family: "Amazon Ember",sans-serif;
   font-size: 13px;
-  line-height: 29px;
-  padding: 0 6px 0 6px;
+  line-height: 25px;
+  padding: 0 4px 0 4px;
   position: relative;
   text-align: center;
   text-decoration: none;
@@ -72,7 +75,7 @@
   -webkit-user-select: none;
   touch-action: manipulation;
   vertical-align: middle;
-  width: 100px;
+  width: 50px;
 }
 
 .add-button:hover {
@@ -91,18 +94,12 @@
 	width: 100%;
 }
 
-h3 .movie-title {
-	font-size: 20px;
+.movie-title {
+	font-size: 16px;
+  font-weight: 700;
 	margin: 0;
-	display: table-cell;
-}
 
-h4 .movie-title {
-	font-size: 20px;
-	margin: 0;
-	display: table-cell;
 }
-
 
 .movie-info {
 	margin-top: 1em;
@@ -119,7 +116,7 @@ h4 .movie-title {
 }
 
 .info-section:last-of-type {
-	text-align:right;
+	text-align:left;
 }
 
 .info-section label {
@@ -131,19 +128,19 @@ h4 .movie-title {
 
 .info-section span {
 	font-weight: 700;
-	font-size: 11px;
+	font-size: 14px;
 }
 
-@media screen and (max-width: 500px) {
-	.movie-card {
-		width: 95%;
-		max-width: 95%;
-		margin: 1em;
-		display: block;
-	}
+// @media screen and (max-width: 500px) {
+// 	.movie-card {
+// 		width: 95%;
+// 		max-width: 95%;
+// 		margin: 1em;
+// 		display: block;
+// 	}
 
-	.container {
-		padding: 0;
-		margin: 0;
-	}
-}
+// 	.container {
+// 		padding: 0;
+// 		margin: 0;
+// 	}
+// }
