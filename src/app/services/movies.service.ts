@@ -50,4 +50,31 @@ export class MoviesService {
         })
       );
   }
+
+  getPopularMovies(): Observable<Movie[]> {
+    return this.http
+      .get(`${this.baseUrl}movie/popular?api_key=${this.apiKey}`)
+      .pipe(
+        map((res) => {
+          return res['results'].map((item) => {
+            return new Movie(
+              item.poster_path,
+              item.adult,
+              item.overview,
+              item.release_date,
+              item.genre_ids,
+              item.id,
+              item.original_title,
+              item.original_language,
+              item.title,
+              item.backdrop_path,
+              item.popularity,
+              item.vote_count,
+              item.video,
+              item.vote_average
+            );
+          });
+        })
+      );
+  }
 }

@@ -33,6 +33,7 @@ export class SearchComponent implements OnInit {
   loading: boolean = false;
 
   movieResults: Movie[];
+  popularMovies: Movie[];
   tvResults: Observable<TvShow[]>;
   actorResults: Observable<Actor[]>;
 
@@ -44,13 +45,19 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchField = new FormControl();
-    // this.movieResults = this.searchField.valueChanges.pipe(
-    //   debounceTime(800),
-    //   distinctUntilChanged(),
-    //   tap(() => (this.loading = true)),
-    //   switchMap((term: string) => this.movieService.searchMovies(term)),
-    //   tap(() => (this.loading = false))
-    // );
+    this.loading = true;
+    this.movieService.getPopularMovies().subscribe((item) => {
+      item.forEach((movie) => {
+        if (
+          movie.backdrop_path !== null &&
+          movie.poster_path !== null &&
+          movie.overview !== ''
+        ) {
+          this.movieResults.push(movie);
+        }
+      });
+      this.loading = false;
+    });
   }
 
   doSearch() {

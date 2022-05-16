@@ -14,6 +14,13 @@
 <div *ngIf="loading" style="text-align: center;">
   <app-loading-spinner></app-loading-spinner>
 </div>
+
+<ng-container *ngIf="!movieResults">
+  <div class="results-container">
+    <app-movie-card *ngFor="let movie of movieResults" [movie]="movie"></app-movie-card>
+  </div>
+</ng-container>
+
 <ng-container *ngIf="movieResults">
   <div class="results-container">
     <app-movie-card *ngFor="let movie of movieResults" [movie]="movie"></app-movie-card>
