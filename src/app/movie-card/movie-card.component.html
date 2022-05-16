@@ -1,33 +1,31 @@
-<div class="movie_card" id="bright">
-  <div class="info_section">
-    <div class="movie_header">
-      <img class="poster" *ngIf="movie.poster_path" [src]="getImagePath(movie.poster_path)"/>
-      <!-- <img class="poster" *ngIf="!movie.poster_path" width="80px" src="../../assets/img/logo.svg"/> -->
-      <h3 class="title" *ngIf="movie.title.length < 70; else longTitle">{{ movie.title }}</h3>
-      <ng-template #longTitle>
-        <h3>
-          {{ movie.title.slice(0,70) + '...' }}
-        </h3>
-      </ng-template>
-      <h6 class="pl-2" *ngIf="movie.release_date">{{movie.release_date.slice(0,4)}}</h6>
-      <div class="genres">
-        <p class="type" *ngFor="let id of movie.genre_ids"><span>{{ getGenre(id) }}</span></p>
+<div class="movie-card">
+  <div class="movie-header" [style.background-image]="'url(' + getImagePath(movie.poster_path) + ')'">
+  </div><!--movie-header-->
+  <div class="movie-content">
+    <div class="movie-content-header">
+
+
+      <h4 class="movie-title">{{ movie.title }}</h4>
+
+      <div class="add-movie">
+        <button class="add-button">Add</button>
       </div>
     </div>
-    <div class="movie_desc">
-      <p class="text">
-        {{ movie.overview.slice(0, 150) + '...' }}
-      </p>
+    <div class="movie-info">
+      <div class="info-section">
+        <label>Release Date</label>
+        <span>{{ movie.release_date.slice(0, 4) }}</span>
+      </div><!--date,time-->
+      <div class="info-section genres">
+        <label>Genres</label>
+        <p *ngIf="movie.genre_ids[0]">{{ getGenre(movie.genre_ids[0]) }}</p>
+        <p *ngIf="movie.genre_ids[1]">{{ getGenre(movie.genre_ids[1]) }}</p>
+      </div><!--screen-->
+      <div class="info-section">
+        <label>Rating</label>
+        <span>{{ movie.vote_average }}</span>
+      </div><!--seat-->
     </div>
-    <div class="movie_social">
-      <ul>
-        <li><i class="material-icons">share</i></li>
-        <li><i class="material-icons">local_movies</i></li>
-        <!-- <li><i class="material-icons" (click)="onSaveMovie(movie)">add</i></li> -->
-      </ul>
-    </div>
-    <button class="btn btn-secondary position-absolute bottom-0 end-0 m-2">View Details</button>
-  </div>
-  <div *ngIf="movie.backdrop_path" class="blur_back bg-shift" [style.background-image]="'url(' + getImagePath(movie.backdrop_path) + ')'"></div>
-  <div *ngIf="!movie.backdrop_path" class="blur_back" ngClass="linear-bg"></div>
-</div>
+  </div><!--movie-content-->
+</div><!--movie-card-->
+

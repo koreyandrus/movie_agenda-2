@@ -1,22 +1,23 @@
 
-<form class="container mt-3" #f="ngForm" (ngSubmit)="onSubmit(f)">
+<form class="container mt-3" #f="ngForm" >
   <div class="input-group mb-3">
     <div class="input-group-prepend">
-      <select name="searchType" class="form-control" style="background-color: #FFF;" [(ngModel)]="selectedType">
-        <option value="movie">Movie</option>
-        <option value="tv">TV Show</option>
-        <option value="person">Actor</option>
+      <select name="searchType" class="form-control" style="background-color: #FFF;" [formControl]="optionField">
+        <option *ngFor="let type of types" [ngValue]="type">{{ type }}</option>
       </select>
     </div>
-    <input type="text" class="form-control" name="searchTerm" placeholder="Search term" ngModel>
-    <button class="btn btn-outline-secondary" type="submit" style="background-color: #d84727;color: #fff">Search</button>
+    <input type="search" class="form-control" name="searchTerm" placeholder="Search term"  [formControl]="searchField">
+    <button class="btn btn-outline-secondary" type="submit" style="background-color: #d84727;color: #fff" (click)="doSearch()">Search</button>
   </div>
 </form>
 
+<ng-container *ngIf="loading">
+  <div class="row wrapper">
+    <h2>Loading...</h2>
+  </div>
+</ng-container>
 <ng-container *ngIf="movieResults">
-  <div class="row">
-      <div class="col-md-2 listing__items" *ngFor="let movie of movieResults | slice:0:18">
-          <app-movie-card [movie]="movie"></app-movie-card>
-      </div>
+  <div class="results-container">
+    <app-movie-card *ngFor="let movie of movieResults" [movie]="movie"></app-movie-card>
   </div>
 </ng-container>

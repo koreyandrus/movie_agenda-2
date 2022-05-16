@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Movie } from '../models/movie.model';
 import { Constants } from '../shared/Constants';
@@ -22,8 +23,31 @@ export class MoviesService {
   }
 
   searchMovies(searchTerm: string): Observable<Movie[]> {
-    return this.http.get<Movie[]>(
-      `${this.baseUrl}search/movie?api_key=${this.apiKey}&query=${searchTerm}`
-    );
+    return this.http
+      .get(
+        `${this.baseUrl}search/movie?api_key=${this.apiKey}&query=${searchTerm}`
+      )
+      .pipe(
+        map((res) => {
+          return res['results'].map((item) => {
+            return new Movie(
+              item.poster_path,
+              item.adult,
+              item.overview,
+              item.release_date,
+              item.genre_ids,
+              item.id,
+              item.original_title,
+              item.original_language,
+              item.title,
+              item.backdrop_path,
+              item.popularity,
+              item.vote_count,
+              item.video,
+              item.vote_average
+            );
+          });
+        })
+      );
   }
 }

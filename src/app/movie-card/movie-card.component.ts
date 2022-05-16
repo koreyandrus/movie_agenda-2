@@ -15,7 +15,10 @@ export class MovieCardComponent implements OnInit {
   ngOnInit(): void {}
 
   getImagePath(img_path) {
-    return 'https://image.tmdb.org/t/p/w370_and_h556_bestv2/' + img_path;
+    if (img_path) {
+      return 'https://image.tmdb.org/t/p/w370_and_h556_bestv2/' + img_path;
+    }
+    return;
   }
 
   getGenre(id) {

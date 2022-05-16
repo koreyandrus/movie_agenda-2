@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, NgModel } from '@angular/forms';
+import { FormControl, FormGroup, NgModel } from '@angular/forms';
+import {
+  Observable,
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  tap,
+} from 'rxjs';
+import {} from 'rxjs';
+
 import { Actor } from '../models/actor.model';
 import { Movie } from '../models/movie.model';
 import { TvShow } from '../models/tv-show.model';
@@ -16,11 +25,16 @@ export class SearchComponent implements OnInit {
   types = ['Movie', 'TV Show', 'Actor'];
   selectedType: string = 'movie';
 
-  movieResults: Movie[];
-  tvResults: TvShow[];
-  actorResults: Actor[];
+  // searchForm = new FormGroup({
+  searchField: FormControl;
+  optionField: FormControl = new FormControl('Movie');
+  // });
 
-  searchForm: FormGroup;
+  loading: boolean = false;
+
+  movieResults: Movie[];
+  tvResults: Observable<TvShow[]>;
+  actorResults: Observable<Actor[]>;
 
   constructor(
     private movieService: MoviesService,
@@ -28,24 +42,48 @@ export class SearchComponent implements OnInit {
     private actorService: ActorService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.searchField = new FormControl();
+    // this.movieResults = this.searchField.valueChanges.pipe(
+    //   debounceTime(800),
+    //   distinctUntilChanged(),
+    //   tap(() => (this.loading = true)),
+    //   switchMap((term: string) => this.movieService.searchMovies(term)),
+    //   tap(() => (this.loading = false))
+    // );
+  }
 
-  onSubmit(form) {
-    if (form.value.searchType === 'movie') {
-      this.movieService.searchMovies(form.value.searchTerm).subscribe((res) => {
-        this.movieResults = res['results'];
-        console.log(this.movieResults);
-      });
-    } else if (form.value.searchType === 'tv') {
-      this.tvService.searchtv(form.value.searchTerm).subscribe((res) => {
-        this.tvResults = res['results'];
-        console.log(this.tvResults);
-      });
-    } else if (form.value.searchType === 'person') {
-      this.actorService.searchActor(form.value.searchTerm).subscribe((res) => {
-        this.actorResults = res.results;
-        console.log(this.actorResults);
-      });
+  doSearch() {
+    if (this.optionField.value === 'Movie') {
+      this.movieResults = [];
+      this.movieService
+        .searchMovies(this.searchField.value)
+        .subscribe((item) => {
+          item.forEach((movie) => {
+            if (
+              movie.backdrop_path !== null &&
+              movie.poster_path !== null &&
+              movie.overview !== ''
+            ) {
+              this.movieResults.push(movie);
+            }
+          });
+        });
     }
+
+    // if (form.value.searchType === 'movie') {
+    //   this.loading = true;
+    //   // this.movieResults = this.movieService.searchMovies(form.value.searchTerm);
+    // } else if (form.value.searchType === 'tv') {
+    //   this.tvService.searchtv(form.value.searchTerm).subscribe((res) => {
+    //     this.tvResults = res['results'];
+    //     console.log(this.tvResults);
+    //   });
+    // } else if (form.value.searchType === 'person') {
+    //   this.actorService.searchActor(form.value.searchTerm).subscribe((res) => {
+    //     this.actorResults = res.results;
+    //     console.log(this.actorResults);
+    //   });
+    // }
   }
 }
