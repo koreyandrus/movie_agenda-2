@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ItemCardComponent } from './item-card/item-card.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { LoadingSpinner } from './shared/loading-spinner/loading-spinner.component';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { LoadingSpinner } from './shared/loading-spinner/loading-spinner.compone
     ItemCardComponent,
     MovieCardComponent,
     LoadingSpinner,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,
