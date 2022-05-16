@@ -1,0 +1,68 @@
+
+@keyframes ldio-3cvr9mjaq6g-1 {
+    0% { transform: rotate(0deg) }
+   50% { transform: rotate(-45deg) }
+  100% { transform: rotate(0deg) }
+}
+@keyframes ldio-3cvr9mjaq6g-2 {
+    0% { transform: rotate(180deg) }
+   50% { transform: rotate(225deg) }
+  100% { transform: rotate(180deg) }
+}
+.ldio-3cvr9mjaq6g > div:nth-child(2) {
+  transform: translate(-15px,0);
+}
+.ldio-3cvr9mjaq6g > div:nth-child(2) div {
+  position: absolute;
+  top: 99.39999999999999px;
+  left: 99.39999999999999px;
+  width: 298.2px;
+  height: 149.1px;
+  border-radius: 298.2px 298.2px 0 0;
+  background: #d84727;
+  animation: ldio-3cvr9mjaq6g-1 1s linear infinite;
+  transform-origin: 149.1px 149.1px
+}
+.ldio-3cvr9mjaq6g > div:nth-child(2) div:nth-child(2) {
+  animation: ldio-3cvr9mjaq6g-2 1s linear infinite
+}
+.ldio-3cvr9mjaq6g > div:nth-child(2) div:nth-child(3) {
+  transform: rotate(-90deg);
+  animation: none;
+}@keyframes ldio-3cvr9mjaq6g-3 {
+    0% { transform: translate(472.15px,0); opacity: 0 }
+   20% { opacity: 1 }
+  100% { transform: translate(173.95px,0); opacity: 1 }
+}
+.ldio-3cvr9mjaq6g > div:nth-child(1) {
+  display: block;
+}
+.ldio-3cvr9mjaq6g > div:nth-child(1) div {
+  position: absolute;
+  top: 228.61999999999998px;
+  left: -19.88px;
+  width: 39.76px;
+  height: 39.76px;
+  border-radius: 50%;
+  background: #f8b26a;
+  animation: ldio-3cvr9mjaq6g-3 1s linear infinite
+}
+.ldio-3cvr9mjaq6g > div:nth-child(1) div:nth-child(1) { animation-delay: -0.67s }
+.ldio-3cvr9mjaq6g > div:nth-child(1) div:nth-child(2) { animation-delay: -0.33s }
+.ldio-3cvr9mjaq6g > div:nth-child(1) div:nth-child(3) { animation-delay: 0s }
+.loadingio-spinner-bean-eater-ppp71tev4j {
+  width: 497px;
+  height: 497px;
+  display: inline-block;
+  overflow: hidden;
+  background: #ffffff;
+}
+.ldio-3cvr9mjaq6g {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0; /* see note above */
+}
+.ldio-3cvr9mjaq6g div { box-sizing: content-box; }

@@ -11,6 +11,7 @@ import { DropdownDirective } from './shared/dropdown.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ItemCardComponent } from './item-card/item-card.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
+import { LoadingSpinner } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
     DropdownDirective,
     ItemCardComponent,
     MovieCardComponent,
+    LoadingSpinner,
   ],
   imports: [
     BrowserModule,

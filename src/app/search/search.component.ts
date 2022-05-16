@@ -56,6 +56,7 @@ export class SearchComponent implements OnInit {
   doSearch() {
     if (this.optionField.value === 'Movie') {
       this.movieResults = [];
+      this.loading = true;
       this.movieService
         .searchMovies(this.searchField.value)
         .subscribe((item) => {
@@ -68,6 +69,7 @@ export class SearchComponent implements OnInit {
               this.movieResults.push(movie);
             }
           });
+          this.loading = false;
         });
     }
 

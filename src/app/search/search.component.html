@@ -11,11 +11,9 @@
   </div>
 </form>
 
-<ng-container *ngIf="loading">
-  <div class="row wrapper">
-    <h2>Loading...</h2>
-  </div>
-</ng-container>
+<div *ngIf="loading" style="text-align: center;">
+  <app-loading-spinner></app-loading-spinner>
+</div>
 <ng-container *ngIf="movieResults">
   <div class="results-container">
     <app-movie-card *ngFor="let movie of movieResults" [movie]="movie"></app-movie-card>
