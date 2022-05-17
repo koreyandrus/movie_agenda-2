@@ -6,18 +6,18 @@
         <option *ngFor="let type of types" [ngValue]="type">{{ type }}</option>
       </select>
     </div>
-    <input type="search" class="form-control" name="searchTerm" placeholder="Search term"  [formControl]="searchField">
-    <button class="btn btn-outline-secondary" type="submit" style="background-color: #d84727;color: #fff" (click)="doSearch()">Search</button>
+    <input type="search" class="form-control" name="searchTerm" placeholder="Showing what's popular"  [formControl]="searchField">
+    <button class="btn btn-outline-secondary" type="submit" style="background-color: hsl(11, 69%, 50%);color: #fff" (click)="doSearch()">Search</button>
   </div>
 </form>
 
-<div *ngIf="loading" style="text-align: center;">
+<div class="loading-spinner" *ngIf="loading">
   <app-loading-spinner></app-loading-spinner>
 </div>
 
 <ng-container *ngIf="!movieResults">
   <div class="results-container">
-    <app-movie-card *ngFor="let movie of movieResults" [movie]="movie"></app-movie-card>
+    <app-movie-card *ngFor="let movie of popularMovies" [movie]="movie"></app-movie-card>
   </div>
 </ng-container>
 

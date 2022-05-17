@@ -45,22 +45,14 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchField = new FormControl();
-    this.loading = true;
-    this.movieService.getPopularMovies().subscribe((item) => {
-      item.forEach((movie) => {
-        if (
-          movie.backdrop_path !== null &&
-          movie.poster_path !== null &&
-          movie.overview !== ''
-        ) {
-          this.movieResults.push(movie);
-        }
-      });
-      this.loading = false;
-    });
+
+    this.getWhatsPopular();
   }
 
   doSearch() {
+    if (this.searchField.value === null) {
+      return;
+    }
     if (this.optionField.value === 'Movie') {
       this.movieResults = [];
       this.loading = true;
@@ -78,21 +70,32 @@ export class SearchComponent implements OnInit {
           });
           this.loading = false;
         });
+    } else if (this.optionField.value === 'TV Show') {
+      this.tvService.searchtv(this.searchField.value).subscribe((res) => {
+        this.tvResults = res['results'];
+        console.log(this.tvResults);
+      });
+    } else if (this.optionField.value === 'Actor') {
+      this.actorService.searchActor(this.searchField.value).subscribe((res) => {
+        this.actorResults = res.results;
+        console.log(this.actorResults);
+      });
     }
-
-    // if (form.value.searchType === 'movie') {
-    //   this.loading = true;
-    //   // this.movieResults = this.movieService.searchMovies(form.value.searchTerm);
-    // } else if (form.value.searchType === 'tv') {
-    //   this.tvService.searchtv(form.value.searchTerm).subscribe((res) => {
-    //     this.tvResults = res['results'];
-    //     console.log(this.tvResults);
-    //   });
-    // } else if (form.value.searchType === 'person') {
-    //   this.actorService.searchActor(form.value.searchTerm).subscribe((res) => {
-    //     this.actorResults = res.results;
-    //     console.log(this.actorResults);
-    //   });
-    // }
+  }
+  getWhatsPopular() {
+    this.loading = true;
+    this.popularMovies = [];
+    this.movieService.getPopularMovies().subscribe((item) => {
+      item.forEach((movie) => {
+        if (
+          movie.backdrop_path !== null &&
+          movie.poster_path !== null &&
+          movie.overview !== ''
+        ) {
+          this.popularMovies.push(movie);
+        }
+      });
+      this.loading = false;
+    });
   }
 }
