@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map, retry } from 'rxjs/operators';
 
 import { Movie } from '../models/movie.model';
 import { Constants } from '../shared/Constants';
@@ -24,57 +24,40 @@ export class MoviesService {
 
   searchMovies(searchTerm: string): Observable<Movie[]> {
     return this.http
-      .get(
+      .get<Movie[]>(
         `${this.baseUrl}search/movie?api_key=${this.apiKey}&query=${searchTerm}`
       )
-      .pipe(
-        map((res) => {
-          return res['results'].map((item) => {
-            return new Movie(
-              item.poster_path,
-              item.adult,
-              item.overview,
-              item.release_date,
-              item.genre_ids,
-              item.id,
-              item.original_title,
-              item.original_language,
-              item.title,
-              item.backdrop_path,
-              item.popularity,
-              item.vote_count,
-              item.video,
-              item.vote_average
-            );
-          });
-        })
-      );
+      .pipe(retry(2), catchError(this.handleError));
   }
 
   getPopularMovies(): Observable<Movie[]> {
     return this.http
-      .get(`${this.baseUrl}movie/popular?api_key=${this.apiKey}`)
-      .pipe(
-        map((res) => {
-          return res['results'].map((item) => {
-            return new Movie(
-              item.poster_path,
-              item.adult,
-              item.overview,
-              item.release_date,
-              item.genre_ids,
-              item.id,
-              item.original_title,
-              item.original_language,
-              item.title,
-              item.backdrop_path,
-              item.popularity,
-              item.vote_count,
-              item.video,
-              item.vote_average
-            );
-          });
-        })
-      );
+      .get<Movie[]>(`${this.baseUrl}movie/popular?api_key=${this.apiKey}`)
+      .pipe(retry(2), catchError(this.handleError));
+  }
+
+  private handleError(errorRes: HttpErrorResponse) {
+    let errorMessage = 'An unknown error occured!';
+
+    if (!errorRes.error || !errorRes.error.error) {
+      return throwError(() => new Error(errorMessage));
+    }
+
+    switch (errorRes.error.error.message) {
+      case 'EMAIL_EXISTS':
+        errorMessage = 'This email exists already!';
+        break;
+      case 'TOO_MANY_ATTEMPTS_TRY_LATER':
+        errorMessage =
+          'Too many sign in attempts. Please wait a little while and try again!';
+        break;
+      case 'EMAIL_NOT_FOUND':
+        errorMessage = 'Incorrect email or password!';
+        break;
+      case 'INVALID_PASSWORD':
+        errorMessage = 'Incorrect email or password!';
+        break;
+    }
+    return throwError(() => new Error(errorMessage));
   }
 }

@@ -1,0 +1,27 @@
+<div class="movie-card">
+  <div class="movie-header" [style.background-image]="'url(' + getImagePath(show.poster_path) + ')'">
+  </div><!--movie-header-->
+  <div class="movie-content">
+    <div class="movie-content-header">
+      <p class="movie-title">{{ show.name }}</p>
+    </div>
+    <div class="movie-info">
+      <div class="info-section">
+        <label>Release Date</label>
+        <span>{{ show.first_air_date }}</span>
+      </div><!--date,time-->
+      <div class="info-section genres">
+        <label>Genres</label>
+        <p *ngIf="show.genre_ids[0]">{{ getGenre(show.genre_ids[0]) }}</p>
+        <p *ngIf="show.genre_ids[1]">{{ getGenre(show.genre_ids[1]) }}</p>
+      </div><!--screen-->
+      <div class="info-section">
+        <label>Rating</label>
+        <span>{{ show.vote_average }}</span>
+      </div>
+      <div class="add-movie">
+        <button class="add-button">Add</button>
+      </div>
+    </div>
+  </div><!--movie-content-->
+</div><!--movie-card-->

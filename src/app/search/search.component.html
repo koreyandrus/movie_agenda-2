@@ -26,3 +26,9 @@
     <app-movie-card *ngFor="let movie of movieResults" [movie]="movie"></app-movie-card>
   </div>
 </ng-container>
+
+<ng-container *ngIf="tvResults">
+  <div class="results-container">
+    <app-tv-card *ngFor="let show of tvResults" [show]="show"></app-tv-card>
+  </div>
+</ng-container>

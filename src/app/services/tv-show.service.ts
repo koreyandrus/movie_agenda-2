@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, retry, throwError } from 'rxjs';
 import { TvShow } from '../models/tv-show.model';
 import { Constants } from '../shared/Constants';
 
@@ -21,8 +21,35 @@ export class TvShowService {
   }
 
   searchtv(searchTerm: string): Observable<TvShow[]> {
-    return this.http.get<TvShow[]>(
-      `${this.baseUrl}search/tv?api_key=${this.apiKey}&query=${searchTerm}`
-    );
+    return this.http
+      .get<TvShow[]>(
+        `${this.baseUrl}search/tv?api_key=${this.apiKey}&query=${searchTerm}`
+      )
+      .pipe(retry(2), catchError(this.handleError));
+  }
+
+  private handleError(errorRes: HttpErrorResponse) {
+    let errorMessage = 'An unknown error occured!';
+
+    if (!errorRes.error || !errorRes.error.error) {
+      return throwError(() => new Error(errorMessage));
+    }
+
+    switch (errorRes.error.error.message) {
+      case 'EMAIL_EXISTS':
+        errorMessage = 'This email exists already!';
+        break;
+      case 'TOO_MANY_ATTEMPTS_TRY_LATER':
+        errorMessage =
+          'Too many sign in attempts. Please wait a little while and try again!';
+        break;
+      case 'EMAIL_NOT_FOUND':
+        errorMessage = 'Incorrect email or password!';
+        break;
+      case 'INVALID_PASSWORD':
+        errorMessage = 'Incorrect email or password!';
+        break;
+    }
+    return throwError(() => new Error(errorMessage));
   }
 }

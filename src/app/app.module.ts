@@ -13,6 +13,8 @@ import { ItemCardComponent } from './item-card/item-card.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { LoadingSpinner } from './shared/loading-spinner/loading-spinner.component';
 import { AuthComponent } from './auth/auth.component';
+import { AgendaComponent } from './agenda/agenda.component';
+import { TvCardComponent } from './tv-card/tv-card.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { AuthComponent } from './auth/auth.component';
     MovieCardComponent,
     LoadingSpinner,
     AuthComponent,
+    AgendaComponent,
+    TvCardComponent,
   ],
   imports: [
     BrowserModule,

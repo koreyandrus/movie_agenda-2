@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgModel } from '@angular/forms';
+import { response } from 'express';
 import {
   Observable,
   debounceTime,
@@ -34,7 +35,7 @@ export class SearchComponent implements OnInit {
 
   movieResults: Movie[];
   popularMovies: Movie[];
-  tvResults: Observable<TvShow[]>;
+  tvResults: TvShow[];
   actorResults: Observable<Actor[]>;
 
   constructor(
@@ -55,11 +56,13 @@ export class SearchComponent implements OnInit {
     }
     if (this.optionField.value === 'Movie') {
       this.movieResults = [];
+      this.tvResults = [];
+
       this.loading = true;
       this.movieService
         .searchMovies(this.searchField.value)
-        .subscribe((item) => {
-          item.forEach((movie) => {
+        .subscribe((response) => {
+          response['results'].forEach((movie) => {
             if (
               movie.backdrop_path !== null &&
               movie.poster_path !== null &&
@@ -71,9 +74,21 @@ export class SearchComponent implements OnInit {
           this.loading = false;
         });
     } else if (this.optionField.value === 'TV Show') {
-      this.tvService.searchtv(this.searchField.value).subscribe((res) => {
-        this.tvResults = res['results'];
-        console.log(this.tvResults);
+      this.movieResults = [];
+      this.tvResults = [];
+
+      this.loading = true;
+      this.tvService.searchtv(this.searchField.value).subscribe((response) => {
+        response['results'].forEach((show) => {
+          if (
+            show.backdrop_path !== null &&
+            show.poster_path !== null &&
+            show.overview !== ''
+          ) {
+            this.tvResults.push(show);
+          }
+        });
+        this.loading = false;
       });
     } else if (this.optionField.value === 'Actor') {
       this.actorService.searchActor(this.searchField.value).subscribe((res) => {
@@ -85,17 +100,22 @@ export class SearchComponent implements OnInit {
   getWhatsPopular() {
     this.loading = true;
     this.popularMovies = [];
-    this.movieService.getPopularMovies().subscribe((item) => {
-      item.forEach((movie) => {
-        if (
-          movie.backdrop_path !== null &&
-          movie.poster_path !== null &&
-          movie.overview !== ''
-        ) {
-          this.popularMovies.push(movie);
-        }
-      });
-      this.loading = false;
+    this.movieService.getPopularMovies().subscribe((response) => {
+      this.popularMovies = response['results'];
     });
+    this.loading = false;
   }
 }
+
+// (item) => {
+//   item.forEach((movie) => {
+//     if (
+//       movie.backdrop_path !== null &&
+//       movie.poster_path !== null &&
+//       movie.overview !== ''
+//     ) {
+//       this.popularMovies.push(movie);
+//     }
+//   });
+//   this.loading = false;
+// }

@@ -4,6 +4,10 @@ import { Injectable } from '@angular/core';
 export class Genres {
   public static readonly genres: { id: number; name: string }[] = [
     {
+      id: 10759,
+      name: 'Action & Adventure',
+    },
+    {
       id: 28,
       name: 'Action',
     },
@@ -36,6 +40,10 @@ export class Genres {
       name: 'Family',
     },
     {
+      id: 10762,
+      name: 'Kids',
+    },
+    {
       id: 14,
       name: 'Fantasy',
     },
@@ -60,6 +68,10 @@ export class Genres {
       name: 'Romance',
     },
     {
+      id: 10763,
+      name: 'News',
+    },
+    {
       id: 878,
       name: 'Science Fiction',
     },
@@ -78,6 +90,26 @@ export class Genres {
     {
       id: 37,
       name: 'Western',
+    },
+    {
+      id: 10765,
+      name: 'Sci-Fi & Fantasy',
+    },
+    {
+      id: 10766,
+      name: 'Soap',
+    },
+    {
+      id: 10767,
+      name: 'Talk',
+    },
+    {
+      id: 10768,
+      name: 'War & Politics',
+    },
+    {
+      id: 10764,
+      name: 'Reality',
     },
   ];
 }
