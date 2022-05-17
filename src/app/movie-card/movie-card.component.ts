@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Movie } from '../models/movie.model';
+import { MoviesService } from '../services/movies.service';
 import { Genres } from '../shared/genres';
 
 @Component({
@@ -9,10 +10,13 @@ import { Genres } from '../shared/genres';
 })
 export class MovieCardComponent implements OnInit {
   @Input() movie: Movie;
+  videoUrl: string;
 
-  constructor() {}
+  constructor(private movieService: MoviesService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.videoUrl = `https://www.youtube.com/watch?v=${this.getTrailerId()}`;
+  }
 
   getImagePath(img_path) {
     if (img_path) {
@@ -23,5 +27,17 @@ export class MovieCardComponent implements OnInit {
 
   getGenre(id) {
     return Genres.genres.find((genre) => genre.id === id).name;
+  }
+
+  onAdd() {
+    console.log(this.movie);
+  }
+
+  getTrailerId() {
+    let key = this.movieService.getVideoId(this.movie.id).subscribe((res) => {
+      return res['results'].find((item) => item.type === 'Trailer')['key'];
+    });
+    console.log(key);
+    return key;
   }
 }

@@ -13,4 +13,5 @@ export class Movie {
   public vote_count: number;
   public video: boolean;
   public vote_average: number;
+  public video_id?: string;
 }

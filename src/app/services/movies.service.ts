@@ -30,6 +30,12 @@ export class MoviesService {
       .pipe(retry(2), catchError(this.handleError));
   }
 
+  getVideoId(movieId: number) {
+    return this.http.get(
+      `${this.baseUrl}movie/${movieId}/videos?api_key=${this.apiKey}&language=${this.language}`
+    );
+  }
+
   getPopularMovies(): Observable<Movie[]> {
     return this.http
       .get<Movie[]>(`${this.baseUrl}movie/popular?api_key=${this.apiKey}`)

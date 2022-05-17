@@ -20,7 +20,10 @@
         <span>{{ movie.vote_average }}</span>
       </div>
       <div class="add-movie">
-        <button class="add-button">Add</button>
+        <button class="add-button" (click)="onAdd()">Add</button>
+      </div>
+      <div class="view-trailer">
+        <button class="trailer-button">Trailer</button>
       </div>
     </div>
   </div><!--movie-content-->

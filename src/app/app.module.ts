@@ -15,6 +15,7 @@ import { LoadingSpinner } from './shared/loading-spinner/loading-spinner.compone
 import { AuthComponent } from './auth/auth.component';
 import { AgendaComponent } from './agenda/agenda.component';
 import { TvCardComponent } from './tv-card/tv-card.component';
+import { VideoPlayerComponent } from './video-player/video-player.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { TvCardComponent } from './tv-card/tv-card.component';
     AuthComponent,
     AgendaComponent,
     TvCardComponent,
+    VideoPlayerComponent,
   ],
   imports: [
     BrowserModule,
