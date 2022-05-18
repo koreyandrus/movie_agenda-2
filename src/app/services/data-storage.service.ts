@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 import { Movie } from '../models/movie.model';
 
 @Injectable({
@@ -10,9 +11,9 @@ export class DataStorageService {
   movie: Movie;
   movies: Movie[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
-  getSavedMovies(): any {
+  getSavedMovies(): Observable<Movie[]> {
     return this.http
       .get('https://movie-agenda-default-rtdb.firebaseio.com/movies.json')
       .pipe(
@@ -26,5 +27,16 @@ export class DataStorageService {
           return movieArray;
         })
       );
+  }
+
+  saveMovie(movieData: Movie) {
+    this.http
+      .post(
+        'https://movie-agenda-default-rtdb.firebaseio.com/movies.json',
+        movieData
+      )
+      .subscribe(() => {
+        alert(`Added ${movieData.title} to your agenda!`);
+      });
   }
 }

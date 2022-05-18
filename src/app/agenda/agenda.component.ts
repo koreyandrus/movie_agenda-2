@@ -23,6 +23,7 @@ export class AgendaComponent implements OnInit {
   getMovies() {
     this.dataService.getSavedMovies().subscribe((response) => {
       this.savedMovies = response;
+      console.log(this.savedMovies);
     });
   }
 }

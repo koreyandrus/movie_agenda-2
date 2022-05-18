@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Movie } from '../models/movie.model';
+import { DataStorageService } from '../services/data-storage.service';
 import { MoviesService } from '../services/movies.service';
 import { Genres } from '../shared/genres';
 
@@ -12,7 +13,10 @@ export class MovieCardComponent implements OnInit {
   @Input() movie: Movie;
   videoUrl: string;
 
-  constructor(private movieService: MoviesService) {}
+  constructor(
+    private movieService: MoviesService,
+    private dataService: DataStorageService
+  ) {}
 
   ngOnInit(): void {
     this.videoUrl = `https://www.youtube.com/watch?v=${this.getTrailerId()}`;
@@ -29,8 +33,10 @@ export class MovieCardComponent implements OnInit {
     return Genres.genres.find((genre) => genre.id === id).name;
   }
 
-  onAdd() {
-    console.log(this.movie);
+  onAdd(movieData: Movie) {
+    this.dataService.getSavedMovies();
+
+    this.dataService.saveMovie(movieData);
   }
 
   getTrailerId() {

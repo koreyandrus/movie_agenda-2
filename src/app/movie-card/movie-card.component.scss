@@ -55,7 +55,12 @@
   }
 }
 
-.add-button {
+.movie-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-button, .trailer-button {
   background-color: #fff;
   border: 1px solid #d5d9d9;
   border-radius: 8px;
@@ -64,10 +69,11 @@
   color: #0f1111;
   cursor: pointer;
   display: inline-block;
-  font-family: "Amazon Ember",sans-serif;
+  // font-family: "Amazon Ember",sans-serif;
   font-size: 13px;
   line-height: 25px;
   padding: 0 4px 0 4px;
+  margin-bottom: 5px;
   position: relative;
   text-align: center;
   text-decoration: none;
@@ -78,11 +84,11 @@
   width: 50px;
 }
 
-.add-button:hover {
+.add-button:hover, .trailer-button:hover {
   background-color: #f7fafa;
 }
 
-.add-button:focus {
+.add-button:focus, .trailer-button:focus {
   border-color: #008296;
   box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
   outline: 0;
