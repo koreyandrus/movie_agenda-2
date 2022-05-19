@@ -1,17 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-video-player',
   templateUrl: './video-player.component.html',
   styleUrls: ['./video-player.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class VideoPlayerComponent implements OnInit {
-  @Input() videoId: string;
-  constructor() {}
+  constructor(
+    public dialogRef: MatDialogRef<VideoPlayerComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
-  ngOnInit(): void {}
-
-  getVideoLink() {
-    this.videoId = 'https://www.youtube.com/watch?v=vc7_mH2PWHs';
+  closeDialog() {
+    this.dialogRef.close('movie');
   }
+
+  ngOnInit() {}
 }

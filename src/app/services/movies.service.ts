@@ -22,48 +22,72 @@ export class MoviesService {
     this.language = Constants.LANGUAGE;
   }
 
+  // searchMovies(searchTerm: string): Observable<Movie[]> {
+  //   return this.http
+  //     .get<Movie[]>(
+  //       `${this.baseUrl}search/movie?api_key=${this.apiKey}&query=${searchTerm}`
+  //     )
+  //     .pipe(retry(2), catchError(this.handleError));
+  // }
+
+  // getVideoId(movieId: number) {
+  //   return this.http.get(
+  //     `${this.baseUrl}movie/${movieId}/videos?api_key=${this.apiKey}&language=${this.language}`
+  //   );
+  // }
+
+  // getPopularMovies(): Observable<Movie[]> {
+  //   return this.http
+  //     .get<Movie[]>(`${this.baseUrl}movie/popular?api_key=${this.apiKey}`)
+  //     .pipe(retry(2), catchError(this.handleError));
+  // }
+
+  // private handleError(errorRes: HttpErrorResponse) {
+  //   let errorMessage = 'An unknown error occured!';
+
+  //   if (!errorRes.error || !errorRes.error.error) {
+  //     return throwError(() => new Error(errorMessage));
+  //   }
+
+  //   switch (errorRes.error.error.message) {
+  //     case 'EMAIL_EXISTS':
+  //       errorMessage = 'This email exists already!';
+  //       break;
+  //     case 'TOO_MANY_ATTEMPTS_TRY_LATER':
+  //       errorMessage =
+  //         'Too many sign in attempts. Please wait a little while and try again!';
+  //       break;
+  //     case 'EMAIL_NOT_FOUND':
+  //       errorMessage = 'Incorrect email or password!';
+  //       break;
+  //     case 'INVALID_PASSWORD':
+  //       errorMessage = 'Incorrect email or password!';
+  //       break;
+  //   }
+  //   return throwError(() => new Error(errorMessage));
+  // }
+
   searchMovies(searchTerm: string): Observable<Movie[]> {
-    return this.http
-      .get<Movie[]>(
-        `${this.baseUrl}search/movie?api_key=${this.apiKey}&query=${searchTerm}`
-      )
-      .pipe(retry(2), catchError(this.handleError));
+    return this.http.get<Movie[]>(
+      `${this.baseUrl}search/movie?api_key=${this.apiKey}&query=${searchTerm}`
+    );
   }
 
-  getVideoId(movieId: number) {
+  getMovie(id: string): Observable<Movie> {
+    return this.http.get<Movie>(
+      `${this.baseUrl}movie/${id}?api_key=${this.apiKey}`
+    );
+  }
+
+  getMovieVideos(id: string): Observable<any> {
     return this.http.get(
-      `${this.baseUrl}movie/${movieId}/videos?api_key=${this.apiKey}&language=${this.language}`
+      `${this.baseUrl}movie/${id}/videos?api_key=${this.apiKey}`
     );
   }
 
   getPopularMovies(): Observable<Movie[]> {
-    return this.http
-      .get<Movie[]>(`${this.baseUrl}movie/popular?api_key=${this.apiKey}`)
-      .pipe(retry(2), catchError(this.handleError));
-  }
-
-  private handleError(errorRes: HttpErrorResponse) {
-    let errorMessage = 'An unknown error occured!';
-
-    if (!errorRes.error || !errorRes.error.error) {
-      return throwError(() => new Error(errorMessage));
-    }
-
-    switch (errorRes.error.error.message) {
-      case 'EMAIL_EXISTS':
-        errorMessage = 'This email exists already!';
-        break;
-      case 'TOO_MANY_ATTEMPTS_TRY_LATER':
-        errorMessage =
-          'Too many sign in attempts. Please wait a little while and try again!';
-        break;
-      case 'EMAIL_NOT_FOUND':
-        errorMessage = 'Incorrect email or password!';
-        break;
-      case 'INVALID_PASSWORD':
-        errorMessage = 'Incorrect email or password!';
-        break;
-    }
-    return throwError(() => new Error(errorMessage));
+    return this.http.get<Movie[]>(
+      `${this.baseUrl}movie/popular?api_key=${this.apiKey}`
+    );
   }
 }
