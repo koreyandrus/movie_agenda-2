@@ -21,7 +21,7 @@
       </div>
       <div class="movie-buttons">
         <button class="add-button" (click)="onAdd(movie)">Add</button>
-        <button class="trailer-button" type="button" (click)="onShowVideoClicked()">Trailer</button>
+        <button class="trailer-button" type="button" *ngIf="videoCode" (click)="onShowVideoClicked()">Trailer</button>
       </div>
     </div>
   </div><!--movie-content-->

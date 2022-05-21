@@ -57,7 +57,7 @@ export class MovieCardComponent implements OnInit {
 
   getVideoCode(id): void {
     this.movieService.getMovieVideos(id).subscribe((res) => {
-      this.videoCode = res.results.filter(this.filterType)[0].key;
+      this.videoCode = res.results.filter(this.filterType)[0]?.key;
     });
   }
 

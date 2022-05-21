@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { Movie } from '../models/movie.model';
