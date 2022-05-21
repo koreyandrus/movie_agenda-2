@@ -23,6 +23,5 @@ export class VideoPlayerComponent implements OnInit {
 
   ngOnInit() {
     this.videoUrl = this.baseUrl + this.videoCode;
-    console.log(this.videoUrl);
   }
 }

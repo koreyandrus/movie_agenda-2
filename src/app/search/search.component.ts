@@ -105,7 +105,6 @@ export class SearchComponent implements OnInit {
     } else if (this.optionField.value === 'Actor') {
       this.actorService.searchActor(this.searchField.value).subscribe((res) => {
         this.actorResults = res.results;
-        console.log(this.actorResults);
       });
     }
   }

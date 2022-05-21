@@ -31,9 +31,7 @@ export class MovieCardComponent implements OnInit {
   ngOnInit(): void {
     // this.getSingleMoviesVideos(this.movie.id);
     this.getVideoCode(this.movie.id);
-    this.movieService
-      .getMovieVideos(this.movie.id)
-      .subscribe((res) => console.log(res));
+    this.movieService.getMovieVideos(this.movie.id).subscribe();
   }
 
   getImagePath(img_path) {
@@ -54,14 +52,17 @@ export class MovieCardComponent implements OnInit {
   }
 
   onShowVideoClicked() {
-    // this.showVideoClicked.emit(true);
     this.videoCodeEvent.emit(this.videoCode);
   }
 
   getVideoCode(id): void {
     this.movieService.getMovieVideos(id).subscribe((res) => {
-      this.videoCode = res.results[0].key;
+      this.videoCode = res.results.filter(this.filterType)[0].key;
     });
+  }
+
+  filterType(vids) {
+    return vids.type == 'Trailer';
   }
 
   // getSingleMoviesVideos(id) {
