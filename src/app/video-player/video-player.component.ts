@@ -16,7 +16,8 @@ export class VideoPlayerComponent implements OnInit {
 
   constructor(private sanitizer: DomSanitizer) {}
 
-  onClose() {
+  onClose($event) {
+    $event.preventDefault();
     this.closeBtnClicked.emit(true);
   }
 
