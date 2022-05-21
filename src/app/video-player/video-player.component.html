@@ -1,12 +1,12 @@
-<div class="app-movie">
-  <div class="movie-details-modal">
-      <a href="javascipt:void(0)" class="float-right">
-          <span class="cross-icon" (click)="closeDialog()">X</span>
+<div class="video-player-container">
+  <div class="close-btn">
+      <a href="" class="float-right">
+          <span class="cross-icon" (click)="onClose()">&#10006;</span>
       </a>
   </div>
-  <div *ngIf="data.video" class="video-movie-main">
-      <iframe [src]="data.video.url" width="100%" height="478px" frameborder="0"
-      allow="autoplay; encrypted-media"
-      allowfullscreen></iframe>
+  <div class="video-player-main">
+      <iframe src="{{ videoUrl | safe }}" frameborder="0"
+      allow="autoplay;"
+      allowfullscreen class="video"></iframe>
   </div>
 </div>

@@ -79,7 +79,7 @@ export class MoviesService {
     );
   }
 
-  getMovieVideos(id: string): Observable<any> {
+  getMovieVideos(id: number): Observable<any> {
     return this.http.get(
       `${this.baseUrl}movie/${id}/videos?api_key=${this.apiKey}`
     );

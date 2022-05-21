@@ -1,21 +1,27 @@
-import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-video-player',
   templateUrl: './video-player.component.html',
   styleUrls: ['./video-player.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class VideoPlayerComponent implements OnInit {
-  constructor(
-    public dialogRef: MatDialogRef<VideoPlayerComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  @Output() closeBtnClicked = new EventEmitter<boolean>();
+  @Input() videoCode: string;
 
-  closeDialog() {
-    this.dialogRef.close('movie');
+  baseUrl = 'https://www.youtube.com/embed/';
+
+  videoUrl: SafeResourceUrl = ``;
+
+  constructor(private sanitizer: DomSanitizer) {}
+
+  onClose() {
+    this.closeBtnClicked.emit(true);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.videoUrl = this.baseUrl + this.videoCode;
+    console.log(this.videoUrl);
+  }
 }

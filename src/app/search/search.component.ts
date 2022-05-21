@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgModel } from '@angular/forms';
 import { response } from 'express';
 import {
@@ -25,6 +25,8 @@ import { TvShowService } from '../services/tv-show.service';
 export class SearchComponent implements OnInit {
   types = ['Movie', 'TV Show', 'Actor'];
   selectedType: string = 'movie';
+  isShowVideo: boolean = false;
+  videoCode: string;
 
   // searchForm = new FormGroup({
   searchField: FormControl;
@@ -48,6 +50,16 @@ export class SearchComponent implements OnInit {
     this.searchField = new FormControl();
 
     this.getWhatsPopular();
+  }
+
+  showVideo(videoCode) {
+    this.videoCode = videoCode;
+
+    this.isShowVideo = true;
+  }
+
+  closeVideo() {
+    this.isShowVideo = false;
   }
 
   doSearch() {
@@ -97,6 +109,13 @@ export class SearchComponent implements OnInit {
       });
     }
   }
+
+  // getVideoCode(id): void {
+  //   this.movieService.getMovieVideos(id).subscribe((res) => {
+  //     this.videoCode = res.results[0].key;
+  //   });
+  // }
+
   getWhatsPopular() {
     this.loading = true;
     this.popularMovies = [];
@@ -106,16 +125,3 @@ export class SearchComponent implements OnInit {
     this.loading = false;
   }
 }
-
-// (item) => {
-//   item.forEach((movie) => {
-//     if (
-//       movie.backdrop_path !== null &&
-//       movie.poster_path !== null &&
-//       movie.overview !== ''
-//     ) {
-//       this.popularMovies.push(movie);
-//     }
-//   });
-//   this.loading = false;
-// }

@@ -15,19 +15,23 @@
   <app-loading-spinner></app-loading-spinner>
 </div>
 
-<ng-container *ngIf="!movieResults">
+<div class="video-player" *ngIf="isShowVideo">
+  <app-video-player [videoCode]="videoCode" (closeBtnClicked)="closeVideo()"></app-video-player>
+</div>
+
+<ng-container *ngIf="!movieResults && !isShowVideo">
   <div class="results-container">
-    <app-movie-card *ngFor="let movie of popularMovies" [movie]="movie"></app-movie-card>
+    <app-movie-card *ngFor="let movie of popularMovies" [movie]="movie" (videoCodeEvent)="showVideo($event)"></app-movie-card>
   </div>
 </ng-container>
 
-<ng-container *ngIf="movieResults">
+<ng-container *ngIf="movieResults  && !isShowVideo">
   <div class="results-container">
-    <app-movie-card *ngFor="let movie of movieResults" [movie]="movie"></app-movie-card>
+    <app-movie-card *ngFor="let movie of movieResults" [movie]="movie" (videoCodeEvent)="showVideo($event)"></app-movie-card>
   </div>
 </ng-container>
 
-<ng-container *ngIf="tvResults">
+<ng-container *ngIf="tvResults  && !isShowVideo">
   <div class="results-container">
     <app-tv-card *ngFor="let show of tvResults" [show]="show"></app-tv-card>
   </div>
