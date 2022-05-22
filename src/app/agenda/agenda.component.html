@@ -1,3 +1,7 @@
-<div class="results-container">
-  <app-movie-card *ngFor="let movie of savedMovies" [movie]="movie"></app-movie-card>
+<div class="video-player" *ngIf="isShowVideo">
+  <app-video-player [videoCode]="videoCode" (closeBtnClicked)="closeVideo()"></app-video-player>
+</div>
+
+<div class="results-container" *ngIf="!isShowVideo">
+  <app-movie-card *ngFor="let movie of savedMovies" [movie]="movie" (videoCodeEvent)="showVideo($event)" [showAddBtn]="isAgenda"></app-movie-card>
 </div>

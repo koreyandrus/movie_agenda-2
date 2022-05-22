@@ -20,7 +20,7 @@
         <span>{{ movie.vote_average }}</span>
       </div>
       <div class="movie-buttons">
-        <button class="add-button" (click)="onAdd(movie)">Add</button>
+        <button class="add-button" (click)="onAdd(movie)" *ngIf="!showAddBtn">Add</button>
         <button class="trailer-button" type="button" *ngIf="videoCode" (click)="onShowVideoClicked()">Trailer</button>
       </div>
     </div>

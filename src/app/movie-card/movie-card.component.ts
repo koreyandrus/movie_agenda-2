@@ -13,6 +13,7 @@ import { Genres } from '../shared/genres';
 })
 export class MovieCardComponent implements OnInit {
   @Input() movie: Movie;
+  @Input() showAddBtn: boolean;
   // @Output() showVideoClicked = new EventEmitter<boolean>();
   @Output() videoCodeEvent = new EventEmitter<string>();
 
@@ -23,9 +24,7 @@ export class MovieCardComponent implements OnInit {
 
   constructor(
     private movieService: MoviesService,
-    private dataService: DataStorageService,
-    private router: Router,
-    private sanitizer: DomSanitizer
+    private dataService: DataStorageService
   ) {}
 
   ngOnInit(): void {
@@ -64,12 +63,4 @@ export class MovieCardComponent implements OnInit {
   filterType(vids) {
     return vids.type == 'Trailer';
   }
-
-  // getSingleMoviesVideos(id) {
-  //   this.movieService.getMovieVideos(id).subscribe((res: any) => {
-  //     if (res.results.length) {
-  //       this.video = res.results[0];
-  //     }
-  //   });
-  // }
 }

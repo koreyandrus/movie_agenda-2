@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { exhaustMap, map, Observable, take } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { Movie } from '../models/movie.model';
 
