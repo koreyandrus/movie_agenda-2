@@ -21,6 +21,7 @@ export class MovieCardComponent implements OnInit {
   autoplay = '?rel=0;&autoplay=1&mute=0';
   videos;
   videoCode: string;
+  certification: string;
 
   constructor(
     private movieService: MoviesService,
@@ -31,6 +32,7 @@ export class MovieCardComponent implements OnInit {
     // this.getSingleMoviesVideos(this.movie.id);
     this.getVideoCode(this.movie.id);
     this.movieService.getMovieVideos(this.movie.id).subscribe();
+    this.getRating(this.movie.id);
   }
 
   getImagePath(img_path) {
@@ -42,6 +44,16 @@ export class MovieCardComponent implements OnInit {
 
   getGenre(id) {
     return Genres.genres.find((genre) => genre.id === id).name;
+  }
+
+  getRating(id): void {
+    this.movieService.getMovieRating(id).subscribe((res) => {
+      this.certification = res.results
+        .filter((type) => type.iso_3166_1 == 'US')[0]
+        .release_dates.filter(
+          (cert) => cert.type === 3 || cert.type === 4
+        )[0].certification;
+    });
   }
 
   onAdd(movieData: Movie) {
@@ -62,5 +74,9 @@ export class MovieCardComponent implements OnInit {
 
   filterType(vids) {
     return vids.type == 'Trailer';
+  }
+
+  filterRating(iso) {
+    return iso.iso_3166_1 == 'US';
   }
 }

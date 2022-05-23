@@ -14,4 +14,6 @@ export class Movie {
   public video: boolean;
   public vote_average: number;
   public video_id?: string;
+
+  public release_dates?: {};
 }
