@@ -32,6 +32,10 @@ export class DataStorageService {
       );
   }
 
+  // movieAlreadySaved(movieId): boolean {
+  //   return this.movies.find
+  // }
+
   getSavedShows(): Observable<TvShow[]> {
     return this.http
       .get(

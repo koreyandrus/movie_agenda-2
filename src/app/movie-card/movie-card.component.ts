@@ -12,7 +12,6 @@ import { Genres } from '../shared/genres';
 export class MovieCardComponent implements OnInit {
   @Input() movie: Movie;
   @Input() showAddBtn: boolean;
-  // @Output() showVideoClicked = new EventEmitter<boolean>();
   @Output() videoCodeEvent = new EventEmitter<string>();
 
   baseVideoUrl = 'https://www.youtube.com/embed/';
@@ -27,9 +26,7 @@ export class MovieCardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.getSingleMoviesVideos(this.movie.id);
     this.getVideoCode(this.movie.id);
-    this.movieService.getMovieVideos(this.movie.id).subscribe();
     this.getRating(this.movie.id);
   }
 
