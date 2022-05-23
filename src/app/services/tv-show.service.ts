@@ -28,6 +28,12 @@ export class TvShowService {
       .pipe(retry(2), catchError(this.handleError));
   }
 
+  getShowRating(id: string) {
+    return this.http.get<any>(
+      `${this.baseUrl}tv/${id}/content_ratings?api_key=${this.apiKey}`
+    );
+  }
+
   private handleError(errorRes: HttpErrorResponse) {
     let errorMessage = 'An unknown error occured!';
 

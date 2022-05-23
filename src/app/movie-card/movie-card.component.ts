@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
 import { Movie } from '../models/movie.model';
 import { DataStorageService } from '../services/data-storage.service';
 import { MoviesService } from '../services/movies.service';

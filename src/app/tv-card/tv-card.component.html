@@ -16,11 +16,11 @@
         <p *ngIf="show.genre_ids[1]">{{ getGenre(show.genre_ids[1]) }}</p>
       </div><!--screen-->
       <div class="info-section">
-        <label>Rating</label>
-        <span>{{ show.vote_average }}</span>
+        <label>Rated</label>
+        <span>{{ certification }}</span>
       </div>
       <div class="add-movie">
-        <button class="add-button">Add</button>
+        <button class="add-button" (click)="onAdd(show)" *ngIf="!showAddBtn">Add</button>
       </div>
     </div>
   </div><!--movie-content-->

@@ -3,6 +3,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { exhaustMap, map, Observable, take } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { Movie } from '../models/movie.model';
+import { TvShow } from '../models/tv-show.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,6 @@ import { Movie } from '../models/movie.model';
 export class DataStorageService {
   movie: Movie;
   movies: Movie[];
-  // userId = this.authService.user.value.id;
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -32,6 +32,24 @@ export class DataStorageService {
       );
   }
 
+  getSavedShows(): Observable<TvShow[]> {
+    return this.http
+      .get(
+        `https://movie-agenda-default-rtdb.firebaseio.com/users/${this.authService.user.value.id}/shows.json`
+      )
+      .pipe(
+        map((resData) => {
+          const showArray: TvShow[] = [];
+          for (let key in resData) {
+            if (resData.hasOwnProperty(key)) {
+              showArray.push(resData[key]);
+            }
+          }
+          return showArray;
+        })
+      );
+  }
+
   saveMovie(movieData: Movie) {
     this.http
       .post(
@@ -40,6 +58,17 @@ export class DataStorageService {
       )
       .subscribe(() => {
         alert(`Added ${movieData.title} to your agenda!`);
+      });
+  }
+
+  saveShow(showData: TvShow) {
+    this.http
+      .post(
+        `https://movie-agenda-default-rtdb.firebaseio.com/users/${this.authService.user.value.id}/shows.json`,
+        showData
+      )
+      .subscribe(() => {
+        alert(`Added ${showData.name} to your agenda!`);
       });
   }
 }

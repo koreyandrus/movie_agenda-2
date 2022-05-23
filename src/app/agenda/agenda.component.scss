@@ -1,3 +1,10 @@
+.type-select {
+  display: flex;
+  justify-content: flex-start;
+
+  margin-top: 1.5rem;
+}
+
 .results-container {
   display: flex;
   flex-wrap: wrap;
@@ -5,3 +12,19 @@
   justify-content: center;
   align-items: center;
 }
+
+.btn {
+  color: hsl(11, 69%, 50%);
+  border-color: hsl(11, 69%, 50%);
+}
+
+.btn.selected {
+  background-color: hsl(11, 69%, 50%);
+  color: #fff;
+}
+
+input[type=button]:focus {
+  outline: 0;
+}
+
+

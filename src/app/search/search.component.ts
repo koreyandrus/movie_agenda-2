@@ -110,12 +110,6 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  // getVideoCode(id): void {
-  //   this.movieService.getMovieVideos(id).subscribe((res) => {
-  //     this.videoCode = res.results[0].key;
-  //   });
-  // }
-
   getWhatsPopular() {
     this.loading = true;
     this.popularMovies = [];
