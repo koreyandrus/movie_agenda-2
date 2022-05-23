@@ -28,6 +28,12 @@ export class TvShowService {
       .pipe(retry(2), catchError(this.handleError));
   }
 
+  getShowVideos(id: number): Observable<any> {
+    return this.http.get(
+      `${this.baseUrl}tv/${id}/videos?api_key=${this.apiKey}`
+    );
+  }
+
   getShowRating(id: string) {
     return this.http.get<any>(
       `${this.baseUrl}tv/${id}/content_ratings?api_key=${this.apiKey}`

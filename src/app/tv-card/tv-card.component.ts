@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TvShow } from '../models/tv-show.model';
 import { DataStorageService } from '../services/data-storage.service';
 import { TvShowService } from '../services/tv-show.service';
@@ -12,7 +12,13 @@ import { Genres } from '../shared/genres';
 export class TvCardComponent implements OnInit {
   @Input() show: TvShow;
   @Input() showAddBtn: boolean;
+  @Output() videoCodeEvent = new EventEmitter<string>();
   certification: string;
+
+  baseVideoUrl = 'https://www.youtube.com/embed/';
+  autoplay = '?rel=0;&autoplay=1&mute=0';
+  videos;
+  videoCode: string;
 
   constructor(
     private dataService: DataStorageService,
@@ -20,12 +26,24 @@ export class TvCardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getVideoCode(this.show.id);
+    this.tvService.getShowVideos(this.show.id).subscribe();
     this.getRating(this.show.id);
   }
 
   onAdd(showData: TvShow) {
     this.dataService.saveShow(showData);
     this.dataService.getSavedShows();
+  }
+
+  onShowVideoClicked() {
+    this.videoCodeEvent.emit(this.videoCode);
+  }
+
+  getVideoCode(id): void {
+    this.tvService.getShowVideos(id).subscribe((res) => {
+      this.videoCode = res.results.filter(this.filterType)[0]?.key;
+    });
   }
 
   getImagePath(img_path) {
@@ -37,6 +55,10 @@ export class TvCardComponent implements OnInit {
 
   getGenre(id) {
     return Genres.genres.find((genre) => genre.id === id).name;
+  }
+
+  filterType(vids) {
+    return vids.type == 'Trailer';
   }
 
   getRating(id): void {

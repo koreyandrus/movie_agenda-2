@@ -4,7 +4,7 @@
 
 <form class="type-select">
   <div class="btn-group">
-    <button class="btn btn-outline-secondary" *ngFor="let view of viewOptions" [ngClass]="{'selected': selectedView == view}" (click)="onViewChange($event)">{{ view }}</button>
+    <button class="btn btn-outline-secondary select-btn" *ngFor="let view of viewOptions" [ngClass]="{'selected': selectedView == view}" (click)="onViewChange($event)">{{ view }}</button>
   </div>
 </form>
 
