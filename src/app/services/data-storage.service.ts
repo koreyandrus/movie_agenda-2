@@ -10,12 +10,15 @@ import { Movie } from '../models/movie.model';
 export class DataStorageService {
   movie: Movie;
   movies: Movie[];
+  // userId = this.authService.user.value.id;
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   getSavedMovies(): Observable<Movie[]> {
     return this.http
-      .get('https://movie-agenda-default-rtdb.firebaseio.com/movies.json')
+      .get(
+        `https://movie-agenda-default-rtdb.firebaseio.com/users/${this.authService.user.value.id}/movies.json`
+      )
       .pipe(
         map((resData) => {
           const movieArray: Movie[] = [];
@@ -32,7 +35,7 @@ export class DataStorageService {
   saveMovie(movieData: Movie) {
     this.http
       .post(
-        'https://movie-agenda-default-rtdb.firebaseio.com/movies.json',
+        `https://movie-agenda-default-rtdb.firebaseio.com/users/${this.authService.user.value.id}/movies.json`,
         movieData
       )
       .subscribe(() => {
