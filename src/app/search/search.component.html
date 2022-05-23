@@ -33,6 +33,6 @@
 
 <ng-container *ngIf="tvResults  && !isShowVideo">
   <div class="results-container">
-    <app-tv-card *ngFor="let show of tvResults" [show]="show"></app-tv-card>
+    <app-tv-card *ngFor="let show of tvResults" [show]="show" (videoCodeEvent)="showVideo($event)"></app-tv-card>
   </div>
 </ng-container>

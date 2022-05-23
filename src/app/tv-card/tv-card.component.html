@@ -19,7 +19,7 @@
         <label>Rated</label>
         <span>{{ certification }}</span>
       </div>
-      <div class="add-movie">
+      <div class="movie-buttons">
         <button class="add-button" (click)="onAdd(show)" *ngIf="!showAddBtn">Add</button>
         <button class="trailer-button" type="button" *ngIf="videoCode" (click)="onShowVideoClicked()">Trailer</button>
       </div>

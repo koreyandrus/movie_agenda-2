@@ -55,6 +55,11 @@
   }
 }
 
+.movie-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
 .add-button, .trailer-button {
   background-color: #fff;
   border: 1px solid #d5d9d9;
