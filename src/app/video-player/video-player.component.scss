@@ -8,6 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 999;
   background-color: hsla(0, 0%, 0%, 95%);
 }
 
@@ -22,7 +23,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 99;
+  z-index: 999;
 
   a {
     text-decoration: none;

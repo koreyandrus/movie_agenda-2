@@ -9,14 +9,14 @@
 </form>
 
 <div class="results-container" *ngIf="!isShowVideo && selectedView == 'Movie'">
-  <app-movie-card *ngFor="let movie of savedMovies" [movie]="movie" (videoCodeEvent)="showVideo($event)" [showAddBtn]="isAgenda"></app-movie-card>
+  <app-movie-card *ngFor="let movie of savedMovies" [movie]="movie" (videoCodeEvent)="showVideo($event)" [isAgenda]="isAgenda"></app-movie-card>
 </div>
 
 <div class="results-container" *ngIf="!isShowVideo && selectedView == 'TV'">
-  <app-tv-card *ngFor="let show of savedShows" [show]="show" (videoCodeEvent)="showVideo($event)" [showAddBtn]="isAgenda"></app-tv-card>
+  <app-tv-card *ngFor="let show of savedShows" [show]="show" (videoCodeEvent)="showVideo($event)" [isAgenda]="isAgenda"></app-tv-card>
 </div>
 
 <div class="results-container" *ngIf="!isShowVideo && selectedView == 'All'">
-  <app-movie-card *ngFor="let movie of savedMovies" [movie]="movie" (videoCodeEvent)="showVideo($event)" [showAddBtn]="isAgenda"></app-movie-card>
-  <app-tv-card *ngFor="let show of savedShows" [show]="show" (videoCodeEvent)="showVideo($event)" [showAddBtn]="isAgenda"></app-tv-card>
+  <app-movie-card *ngFor="let movie of savedMovies" [movie]="movie" (videoCodeEvent)="showVideo($event)" [isAgenda]="isAgenda"></app-movie-card>
+  <app-tv-card *ngFor="let show of savedShows" [show]="show" (videoCodeEvent)="showVideo($event)" [isAgenda]="isAgenda"></app-tv-card>
 </div>

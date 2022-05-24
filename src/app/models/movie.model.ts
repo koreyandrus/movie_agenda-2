@@ -14,7 +14,10 @@ export interface Movie {
   video: boolean;
   vote_average: number;
   video_id?: string;
+
   certification?: string;
+
+  db_id?: string;
 
   release_dates?: {};
 }

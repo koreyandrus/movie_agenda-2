@@ -16,18 +16,18 @@ export class AgendaComponent implements OnInit {
   isShowVideo: boolean = false;
   videoCode: string;
 
-  savedMovies: Movie[];
-  savedShows: TvShow[];
+  savedMovies: Movie[] = [];
+  savedShows: TvShow[] = [];
 
   constructor(private dataService: DataStorageService) {}
 
   ngOnInit(): void {
-    this.getMovies();
-    this.getShows();
-  }
-
-  displayMovies() {
-    // console.log(this.savedMovies);
+    if (this.savedMovies.length === 0) {
+      this.getMovies();
+    }
+    if (this.savedShows.length === 0) {
+      this.getShows();
+    }
   }
 
   showVideo(videoCode) {
@@ -43,7 +43,6 @@ export class AgendaComponent implements OnInit {
   getMovies() {
     this.dataService.getSavedMovies().subscribe((response) => {
       this.savedMovies = response;
-      // console.log(this.savedMovies);
     });
   }
 
