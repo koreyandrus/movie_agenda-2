@@ -16,7 +16,7 @@ export class AgendaComponent implements OnInit {
   isShowVideo: boolean = false;
   videoCode: string;
 
-  savedMovies: Movie[];
+  savedMovies: Movie[] = [];
   savedShows: TvShow[];
 
   constructor(private dataService: DataStorageService) {}
@@ -43,7 +43,6 @@ export class AgendaComponent implements OnInit {
   getMovies() {
     this.dataService.getSavedMovies().subscribe((response) => {
       this.savedMovies = response;
-      // console.log(this.savedMovies);
     });
   }
 

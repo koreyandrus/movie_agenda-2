@@ -45,7 +45,7 @@ export class MovieCardComponent implements OnInit {
     this.movieService.getMovieRating(id).subscribe((res) => {
       this.certification = res.results
         .filter((type) => type.iso_3166_1 == 'US')[0]
-        .release_dates.filter(
+        ?.release_dates.filter(
           (cert) => cert.type === 3 || cert.type === 4
         )[0].certification;
     });
