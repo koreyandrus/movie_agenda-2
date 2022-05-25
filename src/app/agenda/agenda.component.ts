@@ -17,17 +17,21 @@ export class AgendaComponent implements OnInit {
   videoCode: string;
 
   savedMovies: Movie[] = [];
+<<<<<<< HEAD
   savedShows: TvShow[];
+=======
+  savedShows: TvShow[] = [];
+>>>>>>> 7155fe0d77c257001f42de3642cd0d3bdeb357f4
 
   constructor(private dataService: DataStorageService) {}
 
   ngOnInit(): void {
-    this.getMovies();
-    this.getShows();
-  }
-
-  displayMovies() {
-    // console.log(this.savedMovies);
+    if (this.savedMovies.length === 0) {
+      this.getMovies();
+    }
+    if (this.savedShows.length === 0) {
+      this.getShows();
+    }
   }
 
   showVideo(videoCode) {

@@ -11,7 +11,7 @@ import { Genres } from '../shared/genres';
 })
 export class MovieCardComponent implements OnInit {
   @Input() movie: Movie;
-  @Input() showAddBtn: boolean;
+  @Input() isAgenda: boolean;
   @Output() videoCodeEvent = new EventEmitter<string>();
 
   baseVideoUrl = 'https://www.youtube.com/embed/';
@@ -53,8 +53,14 @@ export class MovieCardComponent implements OnInit {
 
   onAdd(movieData: Movie) {
     this.dataService.getSavedMovies();
-
     this.dataService.saveMovie(movieData);
+  }
+
+  onDelete(movieData: Movie) {
+    this.dataService
+      .deleteMovie(movieData)
+      .subscribe((res) => console.log(res));
+    // this.dataService.getSavedMovies();
   }
 
   onShowVideoClicked() {

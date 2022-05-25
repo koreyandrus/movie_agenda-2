@@ -20,8 +20,9 @@
         <span>{{ certification ? certification: 'N/A' }}</span>
       </div>
       <div class="movie-buttons">
-        <button class="add-button" (click)="onAdd(movie)" *ngIf="!showAddBtn">Add</button>
+        <button class="add-button" (click)="onAdd(movie)" *ngIf="!isAgenda">Save</button>
         <button class="trailer-button" type="button" *ngIf="videoCode" (click)="onShowVideoClicked()">Trailer</button>
+        <button class="add-button" (click)="onDelete(movie)" *ngIf="isAgenda">Delete</button>
       </div>
     </div>
   </div><!--movie-content-->
