@@ -17,6 +17,8 @@ export interface Movie {
 
   certification?: string;
 
+  isWatched?: boolean;
+
   db_id?: string;
 
   release_dates?: {};

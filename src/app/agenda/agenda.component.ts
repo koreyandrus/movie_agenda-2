@@ -1,14 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Movie } from '../models/movie.model';
 import { TvShow } from '../models/tv-show.model';
 import { DataStorageService } from '../services/data-storage.service';
+import { MoviesStoreService } from '../services/movies-store.service';
 
 @Component({
   selector: 'app-agenda',
   templateUrl: './agenda.component.html',
   styleUrls: ['./agenda.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AgendaComponent implements OnInit {
+  constructor(
+    private dataService: DataStorageService,
+    private moviesStore: MoviesStoreService
+  ) {}
+
   viewOptions: string[] = ['Movie', 'TV', 'All'];
   selectedView: string = 'Movie';
 
@@ -19,11 +26,9 @@ export class AgendaComponent implements OnInit {
   savedMovies: Movie[] = [];
   savedShows: TvShow[] = [];
 
-  constructor(private dataService: DataStorageService) {}
-
   ngOnInit(): void {
     if (this.savedMovies.length === 0) {
-      this.getMovies();
+      this.savedMovies = this.moviesStore.getMovies();
     }
     if (this.savedShows.length === 0) {
       this.getShows();
