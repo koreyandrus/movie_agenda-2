@@ -16,6 +16,11 @@ export class MoviesStoreService {
     this._movies.next(movies);
   }
 
+  setMovies(movArr: Movie[]) {
+    const movies = [...movArr];
+    this._setMovies(movies);
+  }
+
   addMovie(movie: Movie) {
     const movies = [...this.getMovies(), movie];
     this._setMovies(movies);

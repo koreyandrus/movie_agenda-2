@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { map, switchMap } from 'rxjs';
 import { Movie } from '../models/movie.model';
 import { TvShow } from '../models/tv-show.model';
 import { DataStorageService } from '../services/data-storage.service';
@@ -23,16 +24,11 @@ export class AgendaComponent implements OnInit {
   isShowVideo: boolean = false;
   videoCode: string;
 
-  savedMovies: Movie[] = [];
-  savedShows: TvShow[] = [];
+  // savedMovies: Movie[] = [];
+  // savedShows: TvShow[] = [];
 
   ngOnInit(): void {
-    if (this.savedMovies.length === 0) {
-      this.savedMovies = this.moviesStore.getMovies();
-    }
-    if (this.savedShows.length === 0) {
-      this.getShows();
-    }
+    this.moviesStore.setMovies(this.getMovies());
   }
 
   showVideo(videoCode) {
@@ -45,10 +41,15 @@ export class AgendaComponent implements OnInit {
     this.isShowVideo = false;
   }
 
-  getMovies() {
-    this.dataService.getSavedMovies().subscribe((response) => {
-      this.savedMovies = response;
-    });
+  getMovies(): Movie[] {
+    this.dataService
+      .getSavedMovies()
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      )
+      .subscribe();
   }
 
   getShows() {
