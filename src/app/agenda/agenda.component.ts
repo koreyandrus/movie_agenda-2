@@ -9,8 +9,7 @@ import { DataStorageService } from '../services/data-storage.service';
   styleUrls: ['./agenda.component.scss'],
 })
 export class AgendaComponent implements OnInit {
-  viewOptions: string[] = ['Movie', 'TV', 'All'];
-  selectedView: string = 'Movie';
+  viewOptions: string[] = ['All', 'Movie', 'TV'];
 
   isAgenda: boolean = true;
   isShowVideo: boolean = false;
@@ -18,6 +17,8 @@ export class AgendaComponent implements OnInit {
 
   savedMovies: Movie[] = [];
   savedShows: TvShow[] = [];
+
+  selectedView: string = 'All';
 
   constructor(private dataService: DataStorageService) {}
 
@@ -54,5 +55,15 @@ export class AgendaComponent implements OnInit {
 
   onViewChange($event) {
     this.selectedView = $event.target.innerText;
+    console.log(this.savedMovies);
+    console.log(this.savedShows);
+  }
+
+  onDeleteMovie(id) {
+    this.savedMovies = this.savedMovies.filter((mov) => mov.id !== id);
+  }
+
+  onDeleteShow(id) {
+    this.savedShows = this.savedShows.filter((show) => show.id !== id);
   }
 }

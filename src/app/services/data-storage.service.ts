@@ -49,10 +49,6 @@ export class DataStorageService {
     );
   }
 
-  // isMovieAlreadySaved(movieId): boolean {
-  //   return this.getSavedMovies().map();
-  // }
-
   getSavedShows(): Observable<TvShow[]> {
     return this.http
       .get(
@@ -63,7 +59,7 @@ export class DataStorageService {
           const showArray: TvShow[] = [];
           for (let key in resData) {
             if (resData.hasOwnProperty(key)) {
-              showArray.push(resData[key]);
+              showArray.push({ ...resData[key], db_id: key });
             }
           }
           return showArray;
@@ -80,5 +76,11 @@ export class DataStorageService {
       .subscribe(() => {
         alert(`Added ${showData.name} to your agenda!`);
       });
+  }
+
+  deleteShow(showData: TvShow) {
+    return this.http.delete(
+      `https://movie-agenda-default-rtdb.firebaseio.com/users/${this.authService.user.value.id}/shows/${showData.db_id}.json`
+    );
   }
 }

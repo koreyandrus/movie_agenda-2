@@ -13,6 +13,7 @@ export class MovieCardComponent implements OnInit {
   @Input() movie: Movie;
   @Input() isAgenda: boolean;
   @Output() videoCodeEvent = new EventEmitter<string>();
+  @Output() onDeleteEvent = new EventEmitter();
 
   baseVideoUrl = 'https://www.youtube.com/embed/';
   autoplay = '?rel=0;&autoplay=1&mute=0';
@@ -47,7 +48,7 @@ export class MovieCardComponent implements OnInit {
         .filter((type) => type.iso_3166_1 == 'US')[0]
         ?.release_dates.filter(
           (cert) => cert.type === 3 || cert.type === 4
-        )[0].certification;
+        )[0]?.certification;
     });
   }
 
@@ -60,7 +61,7 @@ export class MovieCardComponent implements OnInit {
     this.dataService
       .deleteMovie(movieData)
       .subscribe((res) => console.log(res));
-    // this.dataService.getSavedMovies();
+    this.onDeleteEvent.emit();
   }
 
   onShowVideoClicked() {

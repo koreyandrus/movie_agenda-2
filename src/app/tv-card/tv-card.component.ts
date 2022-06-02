@@ -12,7 +12,9 @@ import { Genres } from '../shared/genres';
 export class TvCardComponent implements OnInit {
   @Input() show: TvShow;
   @Input() showAddBtn: boolean;
+  @Input() isAgenda: boolean;
   @Output() videoCodeEvent = new EventEmitter<string>();
+  @Output() onDeleteEvent = new EventEmitter();
   certification: string;
 
   baseVideoUrl = 'https://www.youtube.com/embed/';
@@ -34,6 +36,11 @@ export class TvCardComponent implements OnInit {
   onAdd(showData: TvShow) {
     this.dataService.saveShow(showData);
     this.dataService.getSavedShows();
+  }
+
+  onDelete(showData: TvShow) {
+    this.dataService.deleteShow(showData).subscribe((res) => console.log(res));
+    this.onDeleteEvent.emit();
   }
 
   onShowVideoClicked() {
@@ -65,7 +72,7 @@ export class TvCardComponent implements OnInit {
     this.tvService.getShowRating(id).subscribe((res) => {
       this.certification = res.results.filter(
         (type) => type.iso_3166_1 == 'US'
-      )[0].rating;
+      )[0]?.rating;
     });
   }
 }

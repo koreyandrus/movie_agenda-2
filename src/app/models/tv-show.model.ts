@@ -12,4 +12,6 @@ export interface TvShow {
   vote_count: number;
   name: string;
   original_name: string;
+
+  db_id?: string;
 }

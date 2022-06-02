@@ -6,7 +6,7 @@
         <option *ngFor="let type of types" [ngValue]="type">{{ type }}</option>
       </select>
     </div>
-    <input type="search" class="form-control" name="searchTerm" placeholder="Showing what's popular"  [formControl]="searchField">
+    <input type="search" class="form-control" name="searchTerm" placeholder="Showing what's popular"  [formControl]="searchField" (focus)="selectAllText($event)">
     <button class="btn btn-outline-secondary search-btn" type="submit" style="background-color: hsl(11, 69%, 50%);color: #fff" (click)="doSearch()">Search</button>
   </div>
 </form>

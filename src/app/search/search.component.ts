@@ -85,7 +85,6 @@ export class SearchComponent implements OnInit {
           });
           this.loading = false;
         });
-      this.searchField.reset();
     } else if (this.optionField.value === 'TV Show') {
       this.movieResults = [];
       this.tvResults = [];
@@ -117,5 +116,9 @@ export class SearchComponent implements OnInit {
       this.popularMovies = response['results'];
     });
     this.loading = false;
+  }
+
+  selectAllText($event) {
+    $event.target.select();
   }
 }

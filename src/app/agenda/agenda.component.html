@@ -8,15 +8,19 @@
   </div>
 </form>
 
+<div class="empty" *ngIf="savedMovies.length === 0 && savedShows.length === 0">
+  <h3>Visit the <a routerLink="/search">search page</a> to add movies or shows to your agenda!</h3>
+</div>
+
 <div class="results-container" *ngIf="!isShowVideo && selectedView == 'Movie'">
-  <app-movie-card *ngFor="let movie of savedMovies" [movie]="movie" (videoCodeEvent)="showVideo($event)" [isAgenda]="isAgenda"></app-movie-card>
+  <app-movie-card *ngFor="let movie of savedMovies" [movie]="movie" (videoCodeEvent)="showVideo($event)" [isAgenda]="isAgenda" (onDeleteEvent)="onDeleteMovie(movie.id)"></app-movie-card>
 </div>
 
 <div class="results-container" *ngIf="!isShowVideo && selectedView == 'TV'">
-  <app-tv-card *ngFor="let show of savedShows" [show]="show" (videoCodeEvent)="showVideo($event)" [isAgenda]="isAgenda"></app-tv-card>
+  <app-tv-card *ngFor="let show of savedShows" [show]="show" (videoCodeEvent)="showVideo($event)" [isAgenda]="isAgenda" (onDeleteEvent)="onDeleteShow(show.id)"></app-tv-card>
 </div>
 
 <div class="results-container" *ngIf="!isShowVideo && selectedView == 'All'">
-  <app-movie-card *ngFor="let movie of savedMovies" [movie]="movie" (videoCodeEvent)="showVideo($event)" [isAgenda]="isAgenda"></app-movie-card>
-  <app-tv-card *ngFor="let show of savedShows" [show]="show" (videoCodeEvent)="showVideo($event)" [isAgenda]="isAgenda"></app-tv-card>
+  <app-movie-card *ngFor="let movie of savedMovies" [movie]="movie" (videoCodeEvent)="showVideo($event)" [isAgenda]="isAgenda" (onDeleteEvent)="onDeleteMovie(movie.id)"></app-movie-card>
+  <app-tv-card *ngFor="let show of savedShows" [show]="show" (videoCodeEvent)="showVideo($event)" [isAgenda]="isAgenda" (onDeleteEvent)="onDeleteShow(show.id)"></app-tv-card>
 </div>
