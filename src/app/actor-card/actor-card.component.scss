@@ -1,0 +1,140 @@
+.movie-card {
+	background: #ffffff;
+	box-shadow: 0px 6px 18px rgba(0,0,0,.1);
+	width: 100%;
+
+	max-width: 315px;
+	margin: 2em;
+	border-radius: 10px;
+	display:inline-block;
+}
+
+.movie-header {
+	padding:0;
+	margin: 0;
+	height: 367px;
+	width: 315px;
+	display: block;
+	border-top-left-radius: 10px;
+	border-top-right-radius:10px;
+
+  background-size: cover;
+}
+
+.header-icon-container {
+	position: relative;
+}
+
+.movie-card:hover {
+	// transform:scale(1.03);
+	box-shadow: 0px 10px 25px rgba(0,0,0,.2);
+}
+
+.movie-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 315px;
+  height: 150px;
+
+	padding: 18px 18px 24px 18px;
+	margin: 0;
+}
+
+.genres {
+  display: flex;
+  flex-direction: column;
+
+
+  font-size: 9px;
+  text-transform: uppercase;
+	text-align:center;
+
+  p{
+    margin-bottom: 2px;
+  }
+}
+
+.movie-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-button, .trailer-button {
+  background-color: #fff;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  box-sizing: border-box;
+  color: #0f1111;
+  cursor: pointer;
+  display: inline-block;
+  // font-family: "Amazon Ember",sans-serif;
+  font-size: 13px;
+  line-height: 25px;
+  padding: 0 4px 0 4px;
+  margin-bottom: 5px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: 50px;
+}
+
+.add-button:hover, .trailer-button:hover {
+  background-color: #f7fafa;
+}
+
+.add-button:focus, .trailer-button:focus {
+  border-color: #008296;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  outline: 0;
+}
+
+.movie-content-header, .movie-info {
+  display: flex;
+  justify-content: space-between;
+	width: 100%;
+}
+
+.movie-title {
+	font-size: 16px;
+  font-weight: 700;
+	margin: 0;
+
+}
+
+.movie-info {
+	margin-top: 1em;
+}
+
+.info-section {
+	display: table-cell;
+	text-transform: uppercase;
+	text-align:center;
+}
+
+.info-section:first-of-type {
+	text-align:left;
+}
+
+.info-section:last-of-type {
+	text-align:left;
+}
+
+.info-section label {
+	display: block;
+	color: rgba(0,0,0,.5);
+	margin-bottom: .5em;
+	font-size: 9px;
+}
+
+.info-section span {
+	font-weight: 700;
+	font-size: 14px;
+}
+
+

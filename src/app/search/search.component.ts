@@ -1,13 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NgModel } from '@angular/forms';
-import { response } from 'express';
-import {
-  Observable,
-  debounceTime,
-  distinctUntilChanged,
-  switchMap,
-  tap,
-} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
 import {} from 'rxjs';
 
 import { Actor } from '../models/actor.model';
@@ -38,7 +31,7 @@ export class SearchComponent implements OnInit {
   movieResults: Movie[];
   popularMovies: Movie[];
   tvResults: TvShow[];
-  actorResults: Observable<Actor[]>;
+  actorResults: Actor[];
 
   constructor(
     private movieService: MoviesService,
@@ -103,8 +96,16 @@ export class SearchComponent implements OnInit {
         this.loading = false;
       });
     } else if (this.optionField.value === 'Actor') {
+      this.movieResults = [];
+      this.tvResults = [];
+      this.actorResults = [];
+
       this.actorService.searchActor(this.searchField.value).subscribe((res) => {
-        this.actorResults = res.results;
+        res['results'].forEach((actor) => {
+          if (actor.profile_path !== null) {
+            this.actorResults.push(actor);
+          }
+        });
       });
     }
   }

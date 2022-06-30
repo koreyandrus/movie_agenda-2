@@ -1,0 +1,15 @@
+<div class="movie-card">
+  <div class="movie-header" [style.background-image]="'url(' + getImagePath(actor.profile_path) + ')'">
+  </div><!--movie-header-->
+  <div class="movie-content">
+    <div class="movie-content-header">
+      <p class="movie-title">{{ actor.name }}</p>
+    </div>
+    <div class="movie-info">
+      <p class="known-for" *ngFor="let item of actor.known_for">
+        <button *ngIf="item.title">{{ item.title }}</button>
+      </p>
+    </div>
+  </div><!--movie-content-->
+</div><!--movie-card-->
+

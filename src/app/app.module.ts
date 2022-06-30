@@ -18,6 +18,7 @@ import { TvCardComponent } from './tv-card/tv-card.component';
 import { VideoPlayerComponent } from './video-player/video-player.component';
 import { SafePipe } from './shared/safe.pipe';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { ActorCardComponent } from './actor-card/actor-card.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
     TvCardComponent,
     VideoPlayerComponent,
     SafePipe,
+    ActorCardComponent,
   ],
   imports: [
     BrowserModule,
